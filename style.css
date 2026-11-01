@@ -1,0 +1,206 @@
+:root {
+  --pink: #ff4fd8;
+  --cyan: #00f0ff;
+  --purple: #b388ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at top, #2a0e5c, #07030f 70%);
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+}
+
+.card {
+  width: 92%;
+  max-width: 380px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--purple);
+  border-radius: 24px;
+  box-shadow: 0 0 25px #b388ff88, inset 0 0 25px #b388ff33;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  text-shadow: 0 0 8px var(--purple), 0 0 22px var(--purple);
+}
+
+select,
+#restart {
+  padding: 12px;
+  color: #fff;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid var(--purple);
+  border-radius: 14px;
+  cursor: pointer;
+  outline: none;
+}
+
+select option {
+  color: #000;
+}
+
+#restart:hover {
+  box-shadow: 0 0 18px var(--purple);
+}
+
+.scores {
+  display: flex;
+  gap: 12px;
+}
+
+.scores div {
+  flex: 1;
+  padding: 10px;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+}
+
+.scores b {
+  display: block;
+  font-size: 1.5rem;
+}
+
+.x { color: var(--pink); }
+.o { color: var(--cyan); }
+
+#status {
+  margin: 0;
+  min-height: 24px;
+  font-weight: 600;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.cell {
+  aspect-ratio: 1;
+  font-size: 3rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cell:hover {
+  border-color: var(--purple);
+  box-shadow: 0 0 14px var(--purple);
+}
+
+.cell.X {
+  color: var(--pink);
+  text-shadow: 0 0 10px var(--pink), 0 0 25px var(--pink);
+}
+
+.cell.O {
+  color: var(--cyan);
+  text-shadow: 0 0 10px var(--cyan), 0 0 25px var(--cyan);
+}
+
+.cell.win {
+  border-color: currentColor;
+  box-shadow: 0 0 22px currentColor;
+  animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  to { transform: scale(1.08); }
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#mute {
+  font-size: 1.3rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+/* ===== EXTRA NEON UPGRADE ===== */
+body,
+select,
+#restart {
+  font-family: 'Orbitron', 'Segoe UI', sans-serif;
+}
+
+/* slowly moving gradient background */
+body {
+  background: linear-gradient(-45deg, #1a0536, #07030f, #0a1f4d, #2a0e5c);
+  background-size: 400% 400%;
+  animation: bgMove 15s ease infinite;
+}
+
+/* card glow breathing */
+.card {
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+/* heading flicker/glow */
+h1 {
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, var(--pink), var(--cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 10px var(--purple));
+}
+
+/* cells pop in when marked */
+.cell.X,
+.cell.O {
+  animation: pop 0.25s ease;
+}
+
+/* stronger win effect */
+.cell.win {
+  animation: winShake 0.6s ease infinite alternate;
+}
+
+#restart:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 22px var(--pink);
+  border-color: var(--pink);
+}
+
+@keyframes bgMove {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 20px #b388ff66, inset 0 0 20px #b388ff22; }
+  to   { box-shadow: 0 0 40px #ff4fd8aa, inset 0 0 30px #00f0ff33; }
+}
+
+@keyframes pop {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+@keyframes winShake {
+  from { transform: scale(1.05) rotate(-3deg); }
+  to   { transform: scale(1.12) rotate(3deg); }
+}
